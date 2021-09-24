@@ -1,4 +1,4 @@
-package others.aufgabe_01.kundenbestand_einlesen;
+package others.aufgabe_01.c_kundenbestand_durchsuchen;
 
 public class Kunde {
 
@@ -40,6 +40,7 @@ public class Kunde {
         result += this.getCustEmail() +"\n";
         return result;
     }
+
 
 
     public String getCustLastName() {

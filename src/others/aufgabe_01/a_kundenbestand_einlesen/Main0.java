@@ -1,4 +1,4 @@
-package others.aufgabe_01.kundenbestand_einlesen;
+package others.aufgabe_01.a_kundenbestand_einlesen;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package others.aufgabe_01.kundenbestand_sortieren;
+package others.aufgabe_01.b_kundenbestand_sortieren;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

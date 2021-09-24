@@ -1,4 +1,4 @@
-package others.aufgabe_01.kundenbestand_sortieren;
+package others.aufgabe_01.a_kundenbestand_einlesen;
 
 public class Kunde {
 
@@ -40,7 +40,6 @@ public class Kunde {
         result += this.getCustEmail() +"\n";
         return result;
     }
-
 
 
     public String getCustLastName() {
