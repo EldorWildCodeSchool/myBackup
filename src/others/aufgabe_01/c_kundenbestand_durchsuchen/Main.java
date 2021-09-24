@@ -47,21 +47,60 @@ public class Main {
         System.out.println("--- FIRST CUSTOMER IN ARRAY FOUND BY NAME ---");
         System.out.println(searchSequential(kundenliste, "Logan"));
 
-        // Print the first customer found in the array by lastname
+        // Print, if no customer could be found in the array by lastname with the selectionSort search algorithm
         System.out.println("--- NO CUSTOMER IN ARRAY FOUND BY NAME ---");
         System.out.println(searchSequential(kundenliste, "Rabe"));
+        System.out.println();
+
+        // Print the first customer found in the array by lastname with the binary search algorithm
+        System.out.println("--- FIRST CUSTOMER IN ARRAY FOUND BY NAME WITH BINARY SEARCH ---");
+        //Kundenliste vor dem binarySearch sortieren
+        Kunde[] kundenlisteSort = selectionSort(kundenliste);
+        System.out.println(binarySearch(kundenlisteSort, "Logan"));
+
+        // Print, if no customer could be found in the array by lastname with the binary search algorithm
+        System.out.println("--- NO CUSTOMER IN ARRAY FOUND BY NAME WITH BINARY SEARCH ---");
+        //Kundenliste vor dem binarySearch sortieren
+        System.out.println(binarySearch(kundenlisteSort, "Rabe"));
     }
+
+    public static String binarySearch(Kunde[] kundenliste, String searchValue){
+        int leftBorder = 0;
+        int rightBorder = kundenliste.length - 1;
+
+        // with every iteration the (remaining part) of the array will be split in two parts
+        while (leftBorder <= rightBorder) {
+            // Define, what's the middle position of the sorted array
+            int middle = leftBorder + (rightBorder - leftBorder) / 2;
+            // Check if customer is present at middle position of the sorted array
+            if (kundenliste[middle].getCustLastName().equals(searchValue)){
+                return kundenliste[middle].toString();
+            }
+            // If the search value for customer name is greater then the customer name in the middle
+            // of the array, ignore left half of the array.
+            if (kundenliste[middle].getCustLastName().compareTo(searchValue) < 0){
+                leftBorder = middle + 1;
+            }
+            // If the customer name is smaller then the middle value of the array, ignore right half of the array
+            else{
+                rightBorder = middle - 1;
+            }
+        }
+        // Return, if at the end of the loop no customer could be found within the array by binary search
+        return "No customer with name " + searchValue.toUpperCase() + " found in array!";
+    }
+
 
     public static String searchSequential(Kunde[] kundenliste, String lastname){
 
         for (Kunde searchCustomer : kundenliste){
             if (searchCustomer.getCustLastName().equals(lastname)){
-
                 return searchCustomer.toString();
             }
         }
         return "No customer with name " + lastname.toUpperCase() + " found in array!";
     }
+
 
     public static Kunde[] selectionSort2(Kunde[] kundenliste) {
         //https://www.happycoders.eu/de/algorithmen/selection-sort/
