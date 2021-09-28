@@ -70,7 +70,7 @@ public class Thanos {
         System.out.println();
 
 
-        // TODO X: Frestyle: Sort the list by name of the heroes with lambda expression
+        // TODO X: Frestyle: Sort the list by name of the heroes
         heroes.sort(Comparator.comparing(Hero::getName));
         //heroes.sort(Comparator.comparing(Hero::getAge));
         System.out.println("--- SORTED LIST---");
