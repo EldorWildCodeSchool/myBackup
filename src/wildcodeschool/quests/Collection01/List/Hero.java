@@ -1,4 +1,4 @@
-package wildcodeschool.quests.Collection01;
+package wildcodeschool.quests.Collection01.List;
 
 public class Hero {
 

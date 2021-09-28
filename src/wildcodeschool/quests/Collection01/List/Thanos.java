@@ -1,4 +1,6 @@
-package wildcodeschool.quests.Collection01;
+package wildcodeschool.quests.Collection01.List;
+
+import wildcodeschool.quests.Collection01.List.Hero;
 
 import java.util.ArrayList;
 import java.util.Collections;
