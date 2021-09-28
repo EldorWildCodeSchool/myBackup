@@ -1,5 +1,7 @@
 package wildcodeschool.quests.Collection02.ComparableAndComparator;
 
+import java.util.Comparator;
+
 public class Hero implements Comparable<Hero> {
 
     // attributs
@@ -23,7 +25,7 @@ public class Hero implements Comparable<Hero> {
 
         return this.name.compareTo(o.name);
 
-        //Exampple for a compareTo-method for the attribute age which is integer
+        //Example for a compareTo-method on the attribute age which is integer
         // Iterative (naiv) code
         /*if (this.age < o.age) {
             return -1;
@@ -37,7 +39,7 @@ public class Hero implements Comparable<Hero> {
         //return this.age < o.age ? -1 : (this.age == o.age ? 0 : 1);
     }
 
-    // accesseurs (getters)
+   // accesseurs (getters)
     public String getName() {
         return name;
     }

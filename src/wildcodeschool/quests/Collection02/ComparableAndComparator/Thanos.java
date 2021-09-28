@@ -15,15 +15,19 @@ public class Thanos {
         heroes.add(new Hero("Captain America", 100));
         heroes.add(new Hero("Thor", 1501));
         heroes.add(new Hero("EO", 50));
+        heroes.add(new Hero("Party Beast from Bielefeld", 50));
 
         // TODO 1 : Modify Hero to implements Comparable and sort by name (ascending)
         Collections.sort(heroes);
+        //Collections.sort(heroes, Collections.reverseOrder());
         System.out.println("\nOrder by name:");
         showList(heroes);
 
         // TODO 2: Add a Comparator and sort by age (descending)
-        heroes.sort(Comparator.comparing(Hero::getAge));
-        System.out.println("\nOrder by age:");
+        // TODO TOLEARN - LINK: https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#comparing-java.util.function.Function-
+        // TODO TOLEARN - LINK: https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#reversed--
+        heroes.sort(Comparator.comparing(Hero::getAge).reversed());
+        System.out.println("\nOrder by age (descending):");
         showList(heroes);
     }
 
