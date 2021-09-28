@@ -12,6 +12,7 @@ public class Thanos {
 
         // TODO 1 : Create an empty heroes list
 
+        // Instantiate list heroes as an array list
         List<Hero> heroes = new ArrayList<>();
 
         // TODO 2 : Add those heroes to the list
@@ -23,6 +24,7 @@ public class Thanos {
         // name: Thor, age: 1500
         // name: Hulk, age: 49
         // name: Doctor Strange, age: 42
+        // Add values to the list
         heroes.add(new Hero("Black Widow", 34));
         heroes.add(new Hero("Captain America", 100));
         heroes.add(new Hero("Vision", 3));
@@ -34,7 +36,7 @@ public class Thanos {
         heroes.add(new Hero("EO", 50));
 
         System.out.println("--- FRESH LIST WITH ALL PETS OF THANATOS ---");
-        extracted(heroes);
+        printHeroes(heroes);
 
 
         // TODO 3 : It's Thor birthday, now he's 1501
@@ -44,18 +46,20 @@ public class Thanos {
             }
         }
         System.out.println("--- LIST WITH AN OLDER THOR ---");
-        extracted(heroes);
+        printHeroes(heroes);
 
 
         // TODO 4 : Shuffle the heroes list
-        Collections.shuffle(heroes);
+        shuffleHeroes(heroes);
         System.out.println("--- SHUFFLED LIST ---");
-        extracted(heroes);
+        printHeroes(heroes);
+
 
         // TODO 5 : Keep only the half of the list
-        List<Hero> subHeroes = heroes.subList(0, heroes.size()/2);
+        List<Hero> subHeroes = eraseHeroes(heroes);
         System.out.println("--- HALF THE LIST, ERASED BY THANATOS  *SNIP SNIP*---");
-        extracted(subHeroes);
+        printHeroes(subHeroes);
+
 
         // TODO 6 : Loop throught the list and display the name of the remaining heroes
         System.out.println("--- REST OF THE LIST ---");
@@ -64,13 +68,27 @@ public class Thanos {
         }
         System.out.println();
 
+
         // TODO X: Frestyle: Sort the list by name of the heroes with lambda expression
         heroes.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
         System.out.println("--- SORTED LIST---");
-        extracted(heroes);
+        printHeroes(heroes);
     }
 
-    private static void extracted(List<Hero> heroes) {
+    //Helper methods
+    private static List<Hero> eraseHeroes(List<Hero> heroes) {
+        if (!heroes.isEmpty() && (heroes.size()/2) >=2){
+            List<Hero> subHeroes = heroes.subList(0, heroes.size()/2);
+            return subHeroes;
+        }
+        return heroes;
+    }
+
+    private static void shuffleHeroes(List<Hero> heroes) {
+        Collections.shuffle(heroes);
+    }
+
+    private static void printHeroes(List<Hero> heroes) {
         for (Hero toBePrinted : heroes) {
             toBePrinted.printMyHero();
         }
