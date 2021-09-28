@@ -4,6 +4,7 @@ import wildcodeschool.quests.Collection01.List.Hero;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Thanos {
@@ -70,7 +71,8 @@ public class Thanos {
 
 
         // TODO X: Frestyle: Sort the list by name of the heroes with lambda expression
-        heroes.sort((o1, o2) -> o1.getName().compareTo(o2.getName()));
+        heroes.sort(Comparator.comparing(Hero::getName));
+        //heroes.sort(Comparator.comparing(Hero::getAge));
         System.out.println("--- SORTED LIST---");
         printHeroes(heroes);
     }
