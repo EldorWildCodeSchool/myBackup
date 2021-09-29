@@ -26,7 +26,20 @@ public class Thanos {
         // TODO 2: Add a Comparator and sort by age (descending)
         // TODO TOLEARN - LINK: https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#comparing-java.util.function.Function-
         // TODO TOLEARN - LINK: https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#reversed--
-        heroes.sort(Comparator.comparing(Hero::getAge).reversed());
+        // Implemented, after I've seen Christianes solution
+        Comparator compSortHeroesReverse = new Comparator<Hero>() {
+            @Override
+            public int compare(Hero o1, Hero o2) {
+                // Compare should return for reversed sorting:
+                //   0: if (o2.getAge() == o1.getAge()) - values can keep place
+                //  <0: if (o2.getAge() < o1.getAge)    - o2 should be sorted behind o1
+                //  >0: if (o2.getAge() > o1.getAge)    - o2 should be sorted in front of o2
+                return o2.getAge() - o1.getAge();
+            }
+        };
+
+        Collections.sort(heroes, compSortHeroesReverse);
+        //heroes.sort(Comparator.comparing(Hero::getAge).reversed());
         System.out.println("\nOrder by age (descending):");
         showList(heroes);
     }
