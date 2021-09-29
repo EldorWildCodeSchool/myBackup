@@ -24,8 +24,8 @@ public class Thanos {
         showList(heroes);
 
         // TODO 2: Add a Comparator and sort by age (descending)
-        // TODO TOLEARN - LINK: https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#comparing-java.util.function.Function-
-        // TODO TOLEARN - LINK: https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#reversed--
+        // TODO TO LEARN - LINK: https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#comparing-java.util.function.Function-
+        // TODO TO LEARN - LINK: https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html#reversed--
         // Implemented, after I've seen Christianes solution
         Comparator compSortHeroesReverse = new Comparator<Hero>() {
             @Override
