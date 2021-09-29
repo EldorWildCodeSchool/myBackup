@@ -1,9 +1,10 @@
-package test.java.codewars.kata.kyu8;
+package codewars.kata.kyu8;
 
-import codewars.kata.kyu8.Kata_WhatisInBetween;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class Kata_WhatisInBetweenTest {
 
