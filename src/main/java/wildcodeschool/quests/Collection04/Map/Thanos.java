@@ -27,21 +27,21 @@ public class Thanos {
         // Captain America has a Lily
         // Doctor Strange and Black Widow have a Violet
 
-        Map<Hero, Flower> heroTreeMap = new TreeMap<>();
-        heroTreeMap.put(hulk, lily);
-        heroTreeMap.put(blackWidow, violet);
-        heroTreeMap.put(captainAmerica, lily);
-        heroTreeMap.put(thor, rose);
-        heroTreeMap.put(vision, tulip);
-        heroTreeMap.put(scarletWitch, rose);
-        heroTreeMap.put(doctorStrange, violet);
+        Map<Hero, Flower> party = new TreeMap<>();
+        party.put(hulk, lily);
+        party.put(blackWidow, violet);
+        party.put(captainAmerica, lily);
+        party.put(thor, rose);
+        party.put(vision, tulip);
+        party.put(scarletWitch, rose);
+        party.put(doctorStrange, violet);
 
 
         // TODO 2 : Print if `begonia` is contained in the TreeMap
-        System.out.println("Is `begonia` contained in the TreeMap? Result: " + heroTreeMap.containsValue(begonia));
+        System.out.println("Is `begonia` contained in the TreeMap? Result: " + party.containsValue(begonia));
 
         // TODO 3 : For each hero, alphabetically, print the corresponding flower
-        for(Hero hero : heroTreeMap.keySet()){
+        for(Hero hero : party.keySet()){
             /*
             get(Object key):
             Params: key – the key whose associated value is to be returned
@@ -51,7 +51,7 @@ public class Thanos {
             in der Iteration der for each-Schleife aufgelöst werden.
             Da musste ich doch länger drüber nachdenken, obwohl total logisch ;-)
             */
-            Flower flower = heroTreeMap.get(hero);
+            Flower flower = party.get(hero);
             System.out.println(flower.getName());
         }
     }
