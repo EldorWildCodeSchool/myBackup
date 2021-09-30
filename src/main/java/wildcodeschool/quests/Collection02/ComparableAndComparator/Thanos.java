@@ -40,7 +40,7 @@ public class Thanos {
 
         heroes.sort(compSortHeroesReverse);
         // Alternative version of code without using an anonymous class (compSortHeroesReverse)
-        //heroes.sort(Comparator.comparing(Hero::getAge).reversed());
+        heroes.sort(Comparator.comparing(Hero::getAge).reversed());
         System.out.println("\nOrder by age (descending):");
         showList(heroes);
     }
