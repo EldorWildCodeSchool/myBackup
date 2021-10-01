@@ -40,6 +40,9 @@ public class Thanos {
         // TODO 2 : Print if `begonia` is contained in the TreeMap
         System.out.println("Is `begonia` contained in the TreeMap? Result: " + party.containsValue(begonia));
 
+
+
+
         // TODO 3 : For each hero, alphabetically, print the corresponding flower
         for(Hero hero : party.keySet()){
             /*
@@ -52,7 +55,7 @@ public class Thanos {
             Da musste ich doch länger drüber nachdenken, obwohl total logisch ;-)
             */
             Flower flower = party.get(hero);
-            System.out.println(flower.getName());
+            System.out.println(flower.getName() + " (belongs to " + hero.getName() + ")");
         }
     }
 }
