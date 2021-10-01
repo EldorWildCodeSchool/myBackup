@@ -1,5 +1,6 @@
 package wildcodeschool.quests.Collection04.Map;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -26,6 +27,19 @@ public class Thanos {
         // Vision has a Tulip
         // Captain America has a Lily
         // Doctor Strange and Black Widow have a Violet
+
+        // Solution with "local" comparator instead of an override of compareTo-method
+        // from the interface Comparable in class Hero
+        /*
+        Comparator compHero = new Comparator<Hero>() {
+            @Override
+            public int compare(Hero o1, Hero o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        };
+
+        Map<Hero, Flower> party = new TreeMap<>(compHero);
+        */
 
         Map<Hero, Flower> party = new TreeMap<>();
         party.put(hulk, lily);
