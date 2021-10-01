@@ -37,7 +37,8 @@ public class Thanos {
         party.put(doctorStrange, violet);
 
         // TODO 2 : Print if `begonia` is contained in the TreeMap
-        System.out.println("Is `begonia` contained in the TreeMap? Result: " + party.containsValue(begonia));
+        System.out.println("Is `begonia` contained in the TreeMap? \t Result: " + party.containsValue(begonia));
+        System.out.println("Is `rose` contained in the TreeMap? \t Result: " + party.containsValue(rose));
 
         // TODO 3 : For each hero, alphabetically, print the corresponding flower
         for(Hero hero : party.keySet()){
