@@ -34,13 +34,17 @@ public class Thanos {
         Flower[] flowerArr = {rose, rose, rose, tulip,lily,violet,violet};
 
         // Add all entries of the two arrays to the map 'party' with a helper-method
-        addEntries(party, heroArr, flowerArr);
+        // 1. from a static method in class MapHelper
+        // 2. from a static method within this class
+        // MapHelper.addEntriesClassMethod(party, heroArr, flowerArr);
+        addEntriesLocalMethod(party, heroArr, flowerArr);
 
         // TODO 2 : Print if `begonia` is contained in the TreeMap
         System.out.println("Is `begonia` contained in the TreeMap? \t Result: " + party.containsValue(begonia));
         System.out.println("Is `rose` contained in the TreeMap? \t Result: " + party.containsValue(rose));
 
         // TODO 3 : For each hero, alphabetically, print the corresponding flower
+        // Iterate over a set of the key-values (of type Hero) of the map "party"
         for(Hero hero : party.keySet()){
             /*
             get(Object key):
@@ -49,7 +53,7 @@ public class Thanos {
             Remark ER: Es wird also über die Referenz des Schlüssels (Key/hero) die Referenz auf den Wert (Value/flower) geholt
             und der Variablen "flower" zugewiesen. Durch diese Referenz kann auf die Methode "getName" des Objektes des Typs Flower
             in der Iteration der for each-Schleife aufgelöst werden.
-            Da musste ich doch länger drüber nachdenken, obwohl total logisch ;-)
+            Da musste ich doch länger drüber nachdenken, obwohl total logisch. Dem Debugger sei Dank ;-)
             */
             Flower flower = party.get(hero);
             System.out.println(flower.getName() + "\t (belongs to " + hero.getName() + ")");
@@ -58,7 +62,7 @@ public class Thanos {
 
     //  Generic helper-method to add entries from two arrays to a map where one arrays offers the key,
     //  while the other arrays offers the value
-    public static <H, F> void addEntries(Map<H, F> map,H[] keys, F[] values){
+    public static <H, F> void addEntriesLocalMethod(Map<H, F> map,H[] keys, F[] values){
         int index = 0;
         for(H key : keys){
             map.put(key, values[index]);
