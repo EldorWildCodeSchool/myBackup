@@ -1,6 +1,5 @@
 package wildcodeschool.quests.Exceptions01.Exception_handling;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class OddSum {
