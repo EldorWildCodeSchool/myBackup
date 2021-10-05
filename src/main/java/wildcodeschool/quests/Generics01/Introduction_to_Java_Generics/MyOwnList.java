@@ -7,7 +7,7 @@ public class MyOwnList<E> {
     // https://howtodoinjava.com/data-structure/list-implementation-example-in-java/
 
     private int listSize = 0;
-    private static int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 10;
     private Object[] elements;
 
     //Constructor
