@@ -5,6 +5,8 @@ import java.util.Arrays;
 public class MyOwnList<E> {
     // Most of this implementation is from:
     // https://howtodoinjava.com/data-structure/list-implementation-example-in-java/
+    // Also read:
+    // https://www.baeldung.com/java-generic-array
 
     private int listSize = 0;
     private static final int DEFAULT_CAPACITY = 10;
