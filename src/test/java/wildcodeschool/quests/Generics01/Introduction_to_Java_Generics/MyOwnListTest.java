@@ -1,6 +1,7 @@
 package wildcodeschool.quests.Generics01.Introduction_to_Java_Generics;
 
 import org.junit.jupiter.api.Test;
+import wildcodeschool.quests.Generics01.Introduction_to_Java_Generics.solution_with_array.MyOwnList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

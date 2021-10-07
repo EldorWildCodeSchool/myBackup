@@ -1,4 +1,4 @@
-package wildcodeschool.quests.Generics01.Introduction_to_Java_Generics;
+package wildcodeschool.quests.Generics01.Introduction_to_Java_Generics.solution_with_array;
 
 import org.junit.jupiter.api.Test;
 
