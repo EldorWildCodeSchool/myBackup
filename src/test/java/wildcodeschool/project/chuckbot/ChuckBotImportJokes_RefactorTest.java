@@ -15,6 +15,7 @@ class ChuckBotImportJokes_RefactorTest {
         ArrayList<String> myTempObject = new ArrayList<String>(ChuckBotImportJokes_Refactor.importJokesGenericList(myList, "src/test/resources/jokes.txt"));
         myList = (ArrayList<String>)myTempObject.clone();
         assertEquals(250,myList.size());
+        System.out.println();
     }
 
     @Test
@@ -24,6 +25,7 @@ class ChuckBotImportJokes_RefactorTest {
         LinkedList<String> myTempObject = new LinkedList<>(ChuckBotImportJokes_Refactor.importJokesGenericList(myList, "src/test/resources/jokes.txt"));
         myList = (LinkedList<String>)myTempObject.clone();
         assertEquals(250,myList.size());
+        System.out.println();
     }
 
     @Test
@@ -33,6 +35,7 @@ class ChuckBotImportJokes_RefactorTest {
         ArrayList<String> myTempObject = new ArrayList<>(ChuckBotImportJokes_Refactor.importJokesGenericList(myList, "src/test/resources/orange.png"));
         myList = (ArrayList<String>)myTempObject.clone();
         assertEquals(0, myList.size());
+        System.out.println();
     }
 
     @Test
@@ -42,6 +45,7 @@ class ChuckBotImportJokes_RefactorTest {
         LinkedList<String> myTempObject = new LinkedList<>(ChuckBotImportJokes_Refactor.importJokesGenericList(myList, "src/test/resources/orange.png"));
         myList = (LinkedList<String>)myTempObject.clone();
         assertEquals(0, myList.size());
+        System.out.println();
     }
 
     @Test
@@ -51,6 +55,7 @@ class ChuckBotImportJokes_RefactorTest {
         ArrayList<String> myTempObject = new ArrayList<>(ChuckBotImportJokes_Refactor.importJokesGenericList(myList, "src/test/resources/jokesemptyline.txt"));
         myList = (ArrayList<String>)myTempObject.clone();
         assertEquals(248, myList.size());
+        System.out.println();
     }
 
     @Test
@@ -60,14 +65,17 @@ class ChuckBotImportJokes_RefactorTest {
         LinkedList<String> myTempObject = new LinkedList<>(ChuckBotImportJokes_Refactor.importJokesGenericList(myList, "src/test/resources/jokesemptyline.txt"));
         myList = (LinkedList<String>)myTempObject.clone();
         assertEquals(248, myList.size());
+        System.out.println();
     }
 
     @Test
     void importJokesFileExists(){
-        System.out.println("--- TESTING WRONG FILE TYPE WITH LINKED LIST ---");
+        System.out.println("--- TESTING NON EXISTING PATH OR FILE WITH LINKED LIST ---");
         LinkedList<String> myList = new LinkedList<>();
         LinkedList<String> myTempObject = new LinkedList<>(ChuckBotImportJokes_Refactor.importJokesGenericList(myList, "src/test/resources/xxx.txt"));
         myList = (LinkedList<String>)myTempObject.clone();
-        assertEquals(0, myList.size());    }
+        assertEquals(0, myList.size());
+        System.out.println();
+    }
 
 }

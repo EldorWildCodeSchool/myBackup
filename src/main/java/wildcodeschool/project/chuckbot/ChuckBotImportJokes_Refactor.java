@@ -61,12 +61,15 @@ public final class ChuckBotImportJokes_Refactor {
 
     public static List<String> importJokesGenericList(List<String> interfaceList, String path) {
 
+        //TODO 1: Check, if the strings in each line start with a special character (they should not)
+        //TODO 2: Switch from File to Path, so its's all from the NIO package
+
         // create file path from string "path"
         File inputFile = new File(path);
 
         // check if file exists and in case not, return empty list
         if (!inputFile.exists()) {
-            System.err.println("Tried to import jokes but no valid path or input file exist in:" + path);
+            System.err.println("Tried to import jokes but no valid path or input file exist in: " + path);
             return interfaceList;
         }
 
