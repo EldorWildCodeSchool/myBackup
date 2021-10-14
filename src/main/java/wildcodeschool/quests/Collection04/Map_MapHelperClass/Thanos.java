@@ -30,8 +30,8 @@ public class Thanos {
         Map<Hero, Flower> party = new TreeMap<>();
 
         // Instantiate two arrays (hero objects as keys, flower objects as values) to be added to the map 'party'
-        Hero[] heroArr = {hulk, thor, scarletWitch,vision,captainAmerica,doctorStrange,blackWidow};
-        Flower[] flowerArr = {rose, rose, rose, tulip,lily,violet,violet};
+        Hero[] heroArr = {hulk, thor, scarletWitch, vision, captainAmerica, doctorStrange, blackWidow};
+        Flower[] flowerArr = {rose, rose, rose, tulip, lily, violet, violet};
 
         // Add all entries of the two arrays to the map 'party' with a helper-method
         // 1. from a static method in class MapHelper

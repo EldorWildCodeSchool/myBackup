@@ -1,5 +1,6 @@
 package codecatcher.snippets;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +17,7 @@ public class FormatThisDate {
 
     }
 
-    public static void getDates(LocalDate fDate, LocalDate sDate){
+    public static void getDates(LocalDate fDate, LocalDate sDate) {
 
         LocalDate currentDate = LocalDate.now();
         System.out.println("The first date value is: \t" + fDate);
@@ -35,8 +36,6 @@ public class FormatThisDate {
         String chFormattedDate = sDate.format(chDateFormatter);  // 5
         System.out.println("Second date in CH (CHINA) date format (LONG): \t\t" + chFormattedDate);
 
-        System.out.println("\nYears between first and second date in years: \t\t" +  Period.between(fDate, sDate).getYears());
-
+        System.out.println("\nYears between first and second date in years: \t\t" + Period.between(fDate, sDate).getYears());
     }
-
 }
