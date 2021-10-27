@@ -30,36 +30,22 @@ public class ConnectMySQLDriverManager {
             getPersons(conn);
 
             // Insert prepared data from array into persons table
-            PreparedStatement myPrepStatement = conn.prepareStatement("INSERT INTO persons (firstname, lastname, age) VALUES (?, ?, ?)");
             for (int row = 0; row < myPersons.length; row++) {
-                myPrepStatement.setString(1, myPersons[row][0]);
-                myPrepStatement.setString(2, myPersons[row][1]);
-                myPrepStatement.setInt(3, Integer.parseInt(myPersons[row][2]));
-                myPrepStatement.execute();
+                insertIntoPersons(conn, myPersons[row][0], myPersons[row][1], Integer.parseInt(myPersons[row][2]));
             }
-            myPrepStatement.close();
-
             // Print out the content of the filled up persons table
             System.out.println("\n--- \t FILLED UP TABLE \t ---");
             getPersons(conn);
 
             // Update one dataset with prepared statement
-            myPrepStatement = conn.prepareStatement("UPDATE persons SET lastname=? WHERE firstname=?");
-            myPrepStatement.setString(1, "I HAVE BEEN UPDATED");
-            myPrepStatement.setString(2, "Wum");
-            myPrepStatement.execute();
-            myPrepStatement.close();
-
+            updatePersonLastnameByFirstname(conn, "I HAVE BEEN UPDATED", "Wum");
             // Print out the content of the updated persons table
             System.out.println("\n--- \t UPDATED TABLE \t ---");
             getPersons(conn);
 
             // Remove all non-initial datasets from persons table
-            myPrepStatement = conn.prepareStatement("DELETE FROM persons WHERE lastname like ? OR lastname like?");
-            myPrepStatement.setString(1, "Barba");
-            myPrepStatement.setString(2, "I HAVE%");
-            myPrepStatement.execute();
-            myPrepStatement.close();
+            deletePersonByLastname(conn, "Barba");
+            deletePersonByLastname(conn, "I HAVE%");
 
             // Print out the content of the adjusted persons table
             System.out.println("\n--- \t ADJUSTED TABLE \t ---");
@@ -76,9 +62,9 @@ public class ConnectMySQLDriverManager {
                 myAddSQLString = mySQLScanner.nextLine();
                 Statement myInjectedSQLStatement = conn.createStatement();
                 String myInjectedSQLQuery = "SELECT * FROM persons where lastname = '" + myAddSQLString + "'";
-                System.out.println("\nDas auszuführende SQL-Statement lautet: " + myInjectedSQLQuery);
+                System.out.println("\nThe SQL statement to be executed is: " + myInjectedSQLQuery);
                 ResultSet myInjectedSQLResultSet = myInjectedSQLStatement.executeQuery(myInjectedSQLQuery);
-                System.out.println("QUERRY RESULT:");
+                System.out.println("The query resul is:");
                 while (myInjectedSQLResultSet.next()) {
                     System.out.println(myInjectedSQLResultSet.getString(1) + "  " +
                             myInjectedSQLResultSet.getString(2) + "  " +
@@ -97,15 +83,59 @@ public class ConnectMySQLDriverManager {
     }
 
     // This method prints the content of persons table
-    private static void getPersons(Connection conn) throws SQLException {
-        Statement myStatement = conn.createStatement();
-        ResultSet myResultSet = myStatement.executeQuery("select * from persons");
-        while (myResultSet.next())
-            System.out.println(myResultSet.getString(1) + "  " +
-                    myResultSet.getString(2) + "  " +
-                    myResultSet.getInt(3));
-        myStatement.close();
-        myResultSet.close();
+    private static void getPersons(Connection conn) {
+        Statement myStatement = null;
+        try {
+            myStatement = conn.createStatement();
+            ResultSet myResultSet = myStatement.executeQuery("select * from persons");
+            while (myResultSet.next())
+                System.out.println(myResultSet.getString(1) + "  " +
+                        myResultSet.getString(2) + "  " +
+                        myResultSet.getInt(3));
+            myStatement.close();
+            myResultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void deletePersonByLastname(Connection conn, String delLastname){
+        PreparedStatement myPrepStatement = null;
+        try {
+            myPrepStatement = conn.prepareStatement("DELETE FROM persons WHERE lastname like ?");
+            myPrepStatement.setString(1, delLastname);
+            myPrepStatement.execute();
+            myPrepStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void updatePersonLastnameByFirstname(Connection conn, String updLastname, String findFirstname){
+        PreparedStatement myPrepStatement = null;
+        try {
+            myPrepStatement = conn.prepareStatement("UPDATE persons SET lastname=? WHERE firstname=?");
+            myPrepStatement.setString(1, updLastname);
+            myPrepStatement.setString(2, findFirstname);
+            myPrepStatement.execute();
+            myPrepStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void insertIntoPersons(Connection conn, String firstname, String lastname, Integer age){
+        PreparedStatement myPrepStatement = null;
+        try {
+            myPrepStatement = conn.prepareStatement("INSERT INTO persons (firstname, lastname, age) VALUES (?, ?, ?)");
+            myPrepStatement.setString(1, firstname);
+            myPrepStatement.setString(2, lastname);
+            myPrepStatement.setInt(3, age);
+            myPrepStatement.execute();
+            myPrepStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // This method opens a connection to the database and returns it as a connection
