@@ -14,8 +14,9 @@ public class ConnectMySQLDataSourceDBUtils {
         String strQuery = "select * from school";
 
         DataBaseConnectionPersistance myDBPersistance = new DBUtils(dbURL, dbSchema, user, password);
+        Connection myConnection = myDBPersistance.getMySQLConnectionDS();
 
-        try (Connection myConnection = myDBPersistance.getMySQLConnectionDS()) {
+        try {
             if (myConnection != null) {
                 Statement myStatement = myConnection.createStatement();
                 ResultSet myResultSet = myStatement.executeQuery(strQuery);
