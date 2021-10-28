@@ -1,7 +1,6 @@
 package codecatcher.snippets.mySQL;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

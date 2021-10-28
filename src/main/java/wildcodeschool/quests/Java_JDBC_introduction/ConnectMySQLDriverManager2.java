@@ -1,9 +1,11 @@
 package wildcodeschool.quests.Java_JDBC_introduction;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class ConnectMySQLDriverManager {
+public class ConnectMySQLDriverManager2 {
 
     public static void main(String args[]) {
 
@@ -14,45 +16,45 @@ public class ConnectMySQLDriverManager {
         final String user = "simpleuser";
         final String password = "NoClue2021$";
 
-        // Open Connection to Database
-        Connection conn = getMyConnection(url, schema, user, password);
-
-        // Fill some values into an array to be filled into persons table later on
-        String[][] myPersons = {{"Papa", "Barba", "42"},
-                {"Mama", "Barba", "28"},
-                {"Bella", "Barba", "16"},
-                {"Wum", "Barba", "18"},
-                };
-
         try {
+            // Open Connection to database and inizialize the table 'persons'
+            Connection conn = getMyConnection(url, schema, user, password);
+            initializeTable(conn);
+
             // Print out initial content of table
             System.out.println("\n--- \t INITIAL TABLE \t ---");
             getPersons(conn);
 
-            // Insert prepared data from array into persons table
-            for (int row = 0; row < myPersons.length; row++) {
-                insertIntoPersons(conn, myPersons[row][0], myPersons[row][1], Integer.parseInt(myPersons[row][2]));
-            }
-            // Print out the content of the filled up persons table
+            // Insert entires into persons table and print out the result
+            List<String> sqlStmtContainer = new ArrayList<>();
+            sqlStmtContainer.add("INSERT INTO persons VALUES ('Papa', 'Barba', 42);");
+            sqlStmtContainer.add("INSERT INTO persons VALUES ('Mama', 'Barba', 38);");
+            sqlStmtContainer.add("INSERT INTO persons VALUES ('Bella', 'Barba', 18);");
+            sqlStmtContainer.add("INSERT INTO persons VALUES ('Wum', 'Barba', 42);");
+            sqlStmtContainer.add("INSERT INTO persons VALUES ('Johann Wolfgang', 'von Goethe', 270);");
+            sqlStmtContainer.add("INSERT INTO persons VALUES ('Gottfried Wilhelm', 'Leibniz', 375);");
+            cudOnPerson(conn, sqlStmtContainer);
+            sqlStmtContainer.clear();
             System.out.println("\n--- \t FILLED UP TABLE \t ---");
             getPersons(conn);
 
-            // Update one dataset with prepared statement
-            updatePersonLastnameByFirstname(conn, "I HAVE BEEN UPDATED", "Wum");
-            // Print out the content of the updated persons table
+            // Update one dataset with prepared statement and print out the result
+            sqlStmtContainer.add("UPDATE persons SET lastname='I HAVE BEEN UPDATED' WHERE firstname='Wum'");
+            cudOnPerson(conn, sqlStmtContainer);
+            sqlStmtContainer.clear();
             System.out.println("\n--- \t UPDATED TABLE \t ---");
             getPersons(conn);
 
-            // Remove all non-initial datasets from persons table
-            deletePersonByLastname(conn, "Barba");
-            deletePersonByLastname(conn, "I HAVE%");
-
-            // Print out the content of the adjusted persons table
+            // Remove all non-initial datasets from persons table and print out the result
+            sqlStmtContainer.add("DELETE FROM persons WHERE lastname IN ('Barba','I HAVE BEEN UPDATED')");
+            cudOnPerson(conn, sqlStmtContainer);
+            sqlStmtContainer.clear();
             System.out.println("\n--- \t ADJUSTED TABLE \t ---");
             getPersons(conn);
 
             // Implement vulnerable SQL statement because of the use of String concatentation
-            //Hint: https://owasp.org/www-community/attacks/SQL_Injection
+            // Hint: https://owasp.org/www-community/attacks/SQL_Injection
+            // User can try to inject SQL in a loop via system.in. The loop can be left by entering 'exit'
             Scanner mySQLScanner = new Scanner(System.in);
             String myAddSQLString;
             do {
@@ -74,19 +76,34 @@ public class ConnectMySQLDriverManager {
                 myInjectedSQLResultSet.close();
             } while (!"exit".equals(myAddSQLString));
 
-
             // Finaly close the connection to database
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Inizialize and even create table (if needed) persons because of tests with the SQL injection
+    private static void initializeTable(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        List<String> sqlStatements = new ArrayList<>();
+        if (! conn.getMetaData().getTables(null, null, "persons", null).next()){
+            sqlStatements.add("CREATE TABLE persons (firstname VARCHAR(30), lastname VARCHAR(30), age INTEGER);");
+            } else {
+            sqlStatements.add("TRUNCATE TABLE persons;");
+            }
+        sqlStatements.add("INSERT INTO persons VALUES ('John', 'Smith', 31);");
+        sqlStatements.add("INSERT INTO persons VALUES ('Sarah', 'Connor', 29);");
+        for (String sql : sqlStatements){
+            stmt.execute(sql);
         }
     }
 
     // This method prints the content of persons table
-    private static void getPersons(Connection conn) {
-        Statement myStatement = null;
-        try {
-            myStatement = conn.createStatement();
+    private static void getPersons(Connection conn) throws SQLException {
+            Statement myStatement = conn.createStatement();
             ResultSet myResultSet = myStatement.executeQuery("select * from persons");
             while (myResultSet.next())
                 System.out.println(myResultSet.getString(1) + "  " +
@@ -94,60 +111,24 @@ public class ConnectMySQLDriverManager {
                         myResultSet.getInt(3));
             myStatement.close();
             myResultSet.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
-    private static void deletePersonByLastname(Connection conn, String delLastname){
-        PreparedStatement myPrepStatement = null;
-        try {
-            myPrepStatement = conn.prepareStatement("DELETE FROM persons WHERE lastname like ?");
-            myPrepStatement.setString(1, delLastname);
-            myPrepStatement.execute();
-            myPrepStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    // This method executes create, update and  delete (cud) statements against the database
+    private static void cudOnPerson(Connection conn, List<String> cudStatements) throws SQLException {
+        Statement stmt = conn.createStatement();
+        if (conn.getMetaData().getTables(null, null, "persons", null).next()){
+            for (String cudStatement : cudStatements){
+                stmt.execute(cudStatement);
+            }
         }
-    }
-
-    private static void updatePersonLastnameByFirstname(Connection conn, String updLastname, String findFirstname){
-        PreparedStatement myPrepStatement = null;
-        try {
-            myPrepStatement = conn.prepareStatement("UPDATE persons SET lastname=? WHERE firstname=?");
-            myPrepStatement.setString(1, updLastname);
-            myPrepStatement.setString(2, findFirstname);
-            myPrepStatement.execute();
-            myPrepStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void insertIntoPersons(Connection conn, String firstname, String lastname, Integer age){
-        PreparedStatement myPrepStatement = null;
-        try {
-            myPrepStatement = conn.prepareStatement("INSERT INTO persons (firstname, lastname, age) VALUES (?, ?, ?)");
-            myPrepStatement.setString(1, firstname);
-            myPrepStatement.setString(2, lastname);
-            myPrepStatement.setInt(3, age);
-            myPrepStatement.execute();
-            myPrepStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        stmt.close();
     }
 
     // This method opens a connection to the database and returns it as a connection
-    private static Connection getMyConnection(String url, String schema, String user, String password) {
+    private static Connection getMyConnection(String url, String schema, String user, String password) throws ClassNotFoundException, SQLException {
         //Invoke mySQL driver class with fully qualified name ("com.mysql.cj.jdbc.Driver")
-        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection(((url + schema)), user, password);
             return conn;
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }
