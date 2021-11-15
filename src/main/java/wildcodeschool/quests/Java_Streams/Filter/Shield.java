@@ -20,7 +20,7 @@ public class Shield {
         heroes.add(new Hero("Doctor Strange", 42, false));
 
         List<Hero> elders = heroes.stream()
-                .filter(hero -> hero.getAge() > 59)
+                .filter(x -> x.getAge() > 59)
                 .collect(Collectors.toList());
         // TODO 1 : filter heroes in order to found heroes older than 59
 
@@ -30,8 +30,12 @@ public class Shield {
         }
 
         List<Hero> intolerants = heroes.stream()
-                .filter(hero -> hero.isGlutenIntolerant() == true)
+                // .filter(x -> x.isGlutenIntolerant())     // Lösung mit Lambda-Ausdruck
+                .filter(Hero::isGlutenIntolerant)           // Lösung mit Methodenreferenz
                         .collect(Collectors.toList());
+        // Definition Methodenreferenz: Eine Methodenreferenz ist ein Verweis auf eine Methode, ohne diese jedoch aufzurufen.
+        // Syntaktisch trennen zwei Doppelpunkte den Klassennamen oder die Referenz auf der linken Seite von dem Methodennamen auf der rechten.
+
         // TODO 2 : filter heroes in order to found heroes that are gluten intolerants
 
         System.out.println("\nGluten intolerants:");
