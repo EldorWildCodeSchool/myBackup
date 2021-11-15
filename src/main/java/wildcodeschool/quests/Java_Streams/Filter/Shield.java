@@ -35,7 +35,6 @@ public class Shield {
                         .collect(Collectors.toList());
         // Definition Methodenreferenz: Eine Methodenreferenz ist ein Verweis auf eine Methode, ohne diese jedoch aufzurufen.
         // Syntaktisch trennen zwei Doppelpunkte den Klassennamen oder die Referenz auf der linken Seite von dem Methodennamen auf der rechten.
-
         // TODO 2 : filter heroes in order to found heroes that are gluten intolerants
 
         System.out.println("\nGluten intolerants:");
