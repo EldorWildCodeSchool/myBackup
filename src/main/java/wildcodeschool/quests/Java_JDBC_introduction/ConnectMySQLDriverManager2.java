@@ -35,7 +35,7 @@ public class ConnectMySQLDriverManager2 {
             sqlStmtContainer.add("INSERT INTO persons VALUES ('Gottfried Wilhelm', 'Leibniz', 375);");
             cudOnPerson(conn, sqlStmtContainer);
             sqlStmtContainer.clear();
-            System.out.println("\n--- \t FILLED UP TABLE \t ---");
+                System.out.println("\n--- \t FILLED UP TABLE \t ---");
             getPersons(conn);
 
             // Update one dataset with prepared statement and print out the result
