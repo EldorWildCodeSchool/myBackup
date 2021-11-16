@@ -17,14 +17,17 @@ public class Shield {
 
         // TODO 1 : map names to agents list
         // Variante 1
+        // Inspiriert bei Armans-Lösung
         /*List<Agent> agents = names.stream()
-                     .map(name -> name.split(" "))                                  // erzeugt einen Array vom Typ String mit zwei Einträgen
+                     .map(name -> name.split(" "))                                        // erzeugt einen Array vom Typ String mit zwei Einträgen
                      .map(splitString -> new Agent(splitString[0], splitString[1]))       // erzeugt ein neues Agent-Objekt mit den Werten aus dem String-Array
                      .collect(Collectors.toList());
 
         */
 
         // Variante 2
+        // Dies war meine Idee zu "3. Use a Function in which you can call the methodsplit on the string to extract the first and last name:
+        // use these to create an instance ofAgent and return it"
         List<Agent> agents = names.stream()
                         .map(name -> {
                             Agent agentX = new Agent();
