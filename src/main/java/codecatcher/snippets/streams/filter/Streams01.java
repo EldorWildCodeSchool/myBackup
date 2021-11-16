@@ -1,4 +1,4 @@
-package codecatcher.snippets.streams;
+package codecatcher.snippets.streams.filter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
