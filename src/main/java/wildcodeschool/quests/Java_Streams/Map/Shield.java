@@ -27,7 +27,7 @@ public class Shield {
 
         // Variante 2
         // Dies war meine Idee zu "3. Use a Function in which you can call the methodsplit on the string to extract the first and last name:
-        // use these to create an instance ofAgent and return it"
+        // use these to create an instance of an Agent and return it"
         List<Agent> agents = names.stream()
                         .map(name -> {
                             Agent agentX = new Agent();
