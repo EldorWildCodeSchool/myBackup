@@ -18,7 +18,6 @@ public class Shield {
         // TODO 1 : map names to agents list
         // Variante 1
         // Inspiriert bei Armans-Lösung
-
         List<Agent> agents = names.stream()
                      .map(name -> name.split(" "))                                  // erzeugt einen Array vom Typ String mit zwei Einträgen
                      .map(splitString -> new Agent(splitString[0], splitString[1]))       // erzeugt ein neues Agent-Objekt mit den Werten aus dem String-Array
